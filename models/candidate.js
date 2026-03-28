@@ -7,5 +7,7 @@ const candidateschema=new mongoose.Schema({
     party:{
         type:String,
         required:true
-    },
+    }
 })
+const Candidate=mongoose.model('Candidate',candidateschema);
+module.exports=Candidate;
