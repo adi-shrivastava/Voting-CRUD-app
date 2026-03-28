@@ -10,17 +10,19 @@ router.post('/addcandidate',async(req,res)=>{
         res.status(200).json({message:"Candidate added!"});
     }
     catch(err){
+        
         res.status(500).json({message:"Error Adding Candidate!"});
     }
 })
-router.get('/getcandidates',async(req,res)=>{
+router.get('/getcandidate',async(req,res)=>{
     try{
-        const candidates=await Candidates.find();
-        console.log("Fetched Candidates!");
-        res.status(200).json({message:"Candidates Fetched!"},candidates);
+        const candidates=await Candidate.find();
+        console.log("Fetched Candidates!",candidates);
+        res.status(200).json(candidates);
     }
     catch(err){
-        res.status(500).json({message:"Error Fetching Candidatse!"},err);
+        console.log(err);
+        res.status(500).json({message:"Error Fetching Candidates!"});
     }
 })
 module.exports=router;
