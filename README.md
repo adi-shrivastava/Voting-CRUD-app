@@ -80,13 +80,16 @@ npm install
 ```
 Create .env file:
 
+```bash
 JWT_SECRET=your_secret_key
 MONGO_URI=your_mongodb_uri
 PORT=3000
+```
 
 Run server:
+```bash
 node server.js
-
+```
 ---
 💡 Future Improvements
 Frontend integration (React)
