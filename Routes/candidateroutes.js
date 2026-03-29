@@ -26,7 +26,7 @@ router.post('/addcandidate',jwtauthmiddleware,async(req,res)=>{
         const newcandidate=new Candidate(data);
         const savecandidate=await newcandidate.save();
         console.log("Saved in DB",savecandidate);
-        res.status(200).json({response:savecandidate,message:"Candidate added!"});
+        res.status(200).json({response:savecandidate,message:"Candidate added! "});
     }
     catch(err){
         
