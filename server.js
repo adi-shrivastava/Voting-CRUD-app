@@ -1,21 +1,33 @@
 const express=require('express');
 const app=express();
 app.use(express.json());
+
 const db=require('./db');
+
 const candidate=require('./models/candidate');
 console.log(candidate);
+
+const {jwtauthmiddleware,generateToken}=require("./jwt");
+
+
+require('dotenv').config();
 const voter=require('./models/voter');
+
 const bodyparser=require('body-parser');
+
 const candidateroutes=require('./Routes/candidateroutes');
 const voterroutes=require('./Routes/voterroutes');
 app.use(bodyparser.json());
+
 const logrequest=(req,res,next)=>{
     console.log(`${new Date().toLocaleString()} Request Made to ${req.url} with method ${req.method}`);
     next();
 }
 app.use(logrequest);
 app.use('/candidate',candidateroutes);
+app.use('/voter',voterroutes);
 console.log(candidateroutes);
+console.log(voterroutes);
 
 app.get('/',(req,res)=>{
     res.send("Welcome to Voting CRUD Homepage!");

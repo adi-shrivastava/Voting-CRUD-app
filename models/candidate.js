@@ -7,7 +7,12 @@ const candidateschema=new mongoose.Schema({
     party:{
         type:String,
         required:true
+    },
+    age:{
+        type:Number,
+        required:true
     }
+    
 })
 const Candidate=mongoose.model('Candidate',candidateschema);
 module.exports=Candidate;
