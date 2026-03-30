@@ -1,4 +1,4 @@
-🗳️ Voting System Backend API
+🗳️ <h2>Voting System Backend API</h2>
 
 A scalable and secure backend service for a voting platform, built using Node.js, Express, and MongoDB.
 Implements authentication, role-based authorization, and strict vote integrity (one voter → one vote).
