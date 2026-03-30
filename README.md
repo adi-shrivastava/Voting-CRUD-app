@@ -1,58 +1,53 @@
-🗳️ <h2>Voting System Backend API</h2>
+# 🗳️ Voting System Backend API
 
-A scalable and secure backend service for a voting platform, built using Node.js, Express, and MongoDB.
-Implements authentication, role-based authorization, and strict vote integrity (one voter → one vote).
+A scalable and secure backend service for a voting platform built using **Node.js, Express, and MongoDB**.  
+It ensures **one voter → one vote** with proper authentication and role-based access control.
 
 ---
 
-📌 Overview
+## 📌 Overview
 
 This project simulates a real-world voting system where:
 
-- Users can register and securely authenticate
-- Admins manage candidates
-- Each voter is allowed to vote only once
-- Votes are tracked and ranked via a leaderboard system
-
-The architecture follows a modular design with separation of concerns for better scalability and maintainability.
+- Users can register and login securely  
+- Admins manage candidates  
+- Each voter can vote only once  
+- Votes are tracked and ranked via a leaderboard  
 
 ---
 
-✨ Key Features
+## ✨ Key Features
 
-- 🔐 JWT-based Authentication
-- 🛡️ Role-Based Authorization (Admin / Voter)
-- 🗳️ Single Vote Enforcement (No Double Voting)
-- 📊 Dynamic Leaderboard (Sorted by votes)
-- 🧩 Modular MVC-like Architecture
-- ⚙️ RESTful API Design
-- 🔒 Secure Password Handling (hashed + validated)
-
----
-
-🏗️ Architecture
-
-Client → Routes → Controllers → Models → MongoDB
-
-- Routes: API endpoints
-- Controllers: Business logic
-- Models: MongoDB schemas
-- Middlewares: Authentication & access control
+- 🔐 JWT-based Authentication  
+- 🛡️ Role-Based Authorization (Admin / Voter)  
+- 🗳️ One Person → One Vote  
+- 📊 Leaderboard (sorted by votes)  
+- ⚙️ RESTful API Design  
+- 🔒 Secure password handling  
 
 ---
 
-🛠️ Tech Stack
+## 🏗️ Architecture
 
-Layer| Technology
-Backend| Node.js, Express
-Database| MongoDB, Mongoose
-Auth| JSON Web Tokens (JWT)
-Tools| Postman, Git
+```
+Client → Routes → Controllers → Models → Database
+```
 
 ---
 
-📁 Project Structure
+## 🛠️ Tech Stack
 
+- Node.js  
+- Express.js  
+- MongoDB (Mongoose)  
+- JSON Web Tokens (JWT)  
+- Postman  
+
+---
+
+## 📁 Project Structure
+
+```
 controllers/
 models/
 routes/
@@ -60,95 +55,79 @@ middlewares/
 config/
 server.js
 .env
+```
 
 ---
 
-🔑 API Endpoints
+## 🔑 API Endpoints
 
-🔐 Authentication
+### 🔐 Authentication
+- POST `/signup`
+- POST `/login`
 
-- "POST /signup" → Register a new voter
-- "POST /login" → Authenticate and receive JWT
+### 👤 Voter
+- GET `/profile`
+- PUT `/profile/password`
 
----
+### 🗳️ Voting
+- POST `/vote`
 
-👤 Voter
+### 🧑‍💼 Candidate (Admin Only)
+- POST `/candidates`
+- PUT `/candidates/:id`
+- DELETE `/candidates/:id`
 
-- "GET /profile" → Get logged-in voter profile
-- "PUT /profile/password" → Update password
-
----
-
-🗳️ Voting
-
-- "POST /vote" → Cast vote (restricted to one vote per user)
-
----
-
-🧑‍💼 Candidate Management (Admin Only)
-
-- "POST /candidates" → Add candidate
-- "PUT /candidates/:id" → Update candidate
-- "DELETE /candidates/:id" → Delete candidate
+### 📊 Public
+- GET `/candidates`
+- GET `/candidates/leaderboard`
 
 ---
 
-📊 Public Data
+## 🔐 Security & Logic
 
-- "GET /candidates" → Fetch all candidates
-- "GET /candidates/leaderboard" → Get ranked candidates
-
----
-
-🔐 Security & Integrity
-
-- Each voter has a unique Aadhaar identifier
-- Voting is restricted using an "isVoted" flag
-- JWT middleware ensures only authenticated access
-- Admin-only actions protected via role checks
+- Aadhaar is unique per voter  
+- `isVoted` flag prevents double voting  
+- JWT protects private routes  
+- Admin-only routes restricted via role check  
 
 ---
 
-⚙️ Setup & Installation
+## ⚙️ Setup & Installation
 
+```bash
 git clone https://github.com/adi-shrivastava/Voting-CRUD-app
 cd Voting-CRUD-app
 npm install
+```
 
-Environment Variables
+---
 
-Create a ".env" file:
+### Environment Variables
 
+```
 PORT=3000
 MONGO_URI=your_mongodb_connection
 JWT_SECRET=your_secret_key
+```
 
 ---
 
-Run Server
+### ▶️ Run Server
 
+```bash
 npm start
+```
 
 ---
 
-🧪 Testing
+## 📈 Future Improvements
 
-- Use Postman to test all endpoints
-- Include JWT token in headers for protected routes
-
----
-
-📈 Future Enhancements
-
-- Election start/end state control
-- Rate limiting for vote API
-- Real-time vote updates (WebSockets)
-- Frontend integration (React)
+- Election control (start/end)  
+- Rate limiting  
+- Real-time updates  
 
 ---
 
-👨‍💻 Author
+## 👨‍💻 Author
 
 ***Adi Shrivastava***
-
-
