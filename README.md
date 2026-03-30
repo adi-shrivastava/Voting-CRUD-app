@@ -1,102 +1,154 @@
-# 🗳️ Voting System API
+🗳️ Voting System Backend API
 
-A secure and scalable voting system backend built using **Node.js, Express, and MongoDB**.  
-This project implements authentication, role-based access, and CRUD operations, allowing users to vote and admins to manage candidates efficiently.
-
----
-
-## 🚀 Features
-
-- 🔐 JWT Authentication (Signup & Login)
-- 🔒 Password hashing using bcrypt
-- 👤 Role-based access (User / Admin)
-- 🗳️ One-user-one-vote restriction
-- 📋 CRUD operations for candidates
-- 📊 Candidate-wise voting results
-- ⚡ RESTful API architecture
-- 📮 Postman API collection included
+A scalable and secure backend service for a voting platform, built using Node.js, Express, and MongoDB.
+Implements authentication, role-based authorization, and strict vote integrity (one voter → one vote).
 
 ---
 
-## 🧠 Tech Stack
+📌 Overview
 
-- Node.js
-- Express.js
-- MongoDB (Mongoose)
-- JSON Web Token (JWT)
-- bcrypt
+This project simulates a real-world voting system where:
 
----
+- Users can register and securely authenticate
+- Admins manage candidates
+- Each voter is allowed to vote only once
+- Votes are tracked and ranked via a leaderboard system
 
-## 🔑 Authentication Flow
-
-1. User signs up → password is hashed  
-2. User logs in → JWT token is generated  
-3. Token is sent via: Authorization: Bearer <token>
-
-4. Protected routes verify token before access  
+The architecture follows a modular design with separation of concerns for better scalability and maintainability.
 
 ---
 
-## 📌 API Endpoints
+✨ Key Features
 
-### 👤 Auth
-- `POST /person/signup` → Register user  
-- `POST /person/login` → Login & get JWT  
-
-### 🗳️ Voting
-- `GET /candidates` → View candidates  
-- `POST /vote` → Vote (restricted to once per user)  
-- `GET /results` → View vote counts  
-
-### 👑 Admin
-- `POST /candidate` → Create candidate  
-- `PUT /candidate/:id` → Update candidate  
-- `DELETE /candidate/:id` → Delete candidate  
+- 🔐 JWT-based Authentication
+- 🛡️ Role-Based Authorization (Admin / Voter)
+- 🗳️ Single Vote Enforcement (No Double Voting)
+- 📊 Dynamic Leaderboard (Sorted by votes)
+- 🧩 Modular MVC-like Architecture
+- ⚙️ RESTful API Design
+- 🔒 Secure Password Handling (hashed + validated)
 
 ---
 
-## 📮 Postman Collection
+🏗️ Architecture
 
-This project includes a Postman collection for easy API testing.
+Client → Routes → Controllers → Models → MongoDB
 
-### 🔹 How to use:
-1. Open Postman  
-2. Click **Import**  
-3. Select the provided collection file (`VotingSystem.postman_collection.json`)  
-4. Run requests directly  
+- Routes: API endpoints
+- Controllers: Business logic
+- Models: MongoDB schemas
+- Middlewares: Authentication & access control
 
-### 🔹 Authorization:
-- Use **Bearer Token**  
-- Add token in headers:
 ---
 
-## ⚙️ Setup
+🛠️ Tech Stack
 
-```bash
-git clone <repo-link>
-cd voting-system
+Layer| Technology
+Backend| Node.js, Express
+Database| MongoDB, Mongoose
+Auth| JSON Web Tokens (JWT)
+Tools| Postman, Git
+
+---
+
+📁 Project Structure
+
+controllers/
+models/
+routes/
+middlewares/
+config/
+server.js
+.env
+
+---
+
+🔑 API Endpoints
+
+🔐 Authentication
+
+- "POST /signup" → Register a new voter
+- "POST /login" → Authenticate and receive JWT
+
+---
+
+👤 Voter
+
+- "GET /profile" → Get logged-in voter profile
+- "PUT /profile/password" → Update password
+
+---
+
+🗳️ Voting
+
+- "POST /vote" → Cast vote (restricted to one vote per user)
+
+---
+
+🧑‍💼 Candidate Management (Admin Only)
+
+- "POST /candidates" → Add candidate
+- "PUT /candidates/:id" → Update candidate
+- "DELETE /candidates/:id" → Delete candidate
+
+---
+
+📊 Public Data
+
+- "GET /candidates" → Fetch all candidates
+- "GET /candidates/leaderboard" → Get ranked candidates
+
+---
+
+🔐 Security & Integrity
+
+- Each voter has a unique Aadhaar identifier
+- Voting is restricted using an "isVoted" flag
+- JWT middleware ensures only authenticated access
+- Admin-only actions protected via role checks
+
+---
+
+⚙️ Setup & Installation
+
+git clone https://github.com/adi-shrivastava/Voting-CRUD-app
+cd Voting-CRUD-app
 npm install
-```
-Create .env file:
 
-```bash
-JWT_SECRET=your_secret_key
-MONGO_URI=your_mongodb_uri
+Environment Variables
+
+Create a ".env" file:
+
 PORT=3000
-```
+MONGO_URI=your_mongodb_connection
+JWT_SECRET=your_secret_key
 
-Run server:
-```bash
-node server.js
-```
 ---
-💡 Future Improvements
-Frontend integration (React)
-Real-time vote updates
-Rate limiting & security enhancements
-Unit testing
+
+Run Server
+
+npm start
+
+---
+
+🧪 Testing
+
+- Use Postman to test all endpoints
+- Include JWT token in headers for protected routes
+
+---
+
+📈 Future Enhancements
+
+- Election start/end state control
+- Rate limiting for vote API
+- Real-time vote updates (WebSockets)
+- Frontend integration (React)
+
+---
 
 👨‍💻 Author
 
 ***Adi Shrivastava***
+
+
