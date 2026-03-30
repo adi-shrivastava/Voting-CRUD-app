@@ -37,7 +37,7 @@ router.get('/getcandidate',async(req,res)=>{
     try{
         const candidates=await Candidate.find();
         console.log("Fetched Candidates!",candidates);
-        res.status(200).json(candidates);
+        res.status(200).json({candidates:candidates});
     }
     catch(err){
         console.log(err);
