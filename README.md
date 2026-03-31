@@ -1,102 +1,133 @@
-# 🗳️ Voting System API
+# 🗳️ Voting System Backend API
 
-A secure and scalable voting system backend built using **Node.js, Express, and MongoDB**.  
-This project implements authentication, role-based access, and CRUD operations, allowing users to vote and admins to manage candidates efficiently.
-
----
-
-## 🚀 Features
-
-- 🔐 JWT Authentication (Signup & Login)
-- 🔒 Password hashing using bcrypt
-- 👤 Role-based access (User / Admin)
-- 🗳️ One-user-one-vote restriction
-- 📋 CRUD operations for candidates
-- 📊 Candidate-wise voting results
-- ⚡ RESTful API architecture
-- 📮 Postman API collection included
+A scalable and secure backend service for a voting platform built using **Node.js, Express, and MongoDB**.  
+It ensures **one voter → one vote** with proper authentication and role-based access control.
 
 ---
 
-## 🧠 Tech Stack
+## 📌 Overview
 
-- Node.js
-- Express.js
-- MongoDB (Mongoose)
-- JSON Web Token (JWT)
-- bcrypt
+This project simulates a real-world voting system where:
 
----
-
-## 🔑 Authentication Flow
-
-1. User signs up → password is hashed  
-2. User logs in → JWT token is generated  
-3. Token is sent via: Authorization: Bearer <token>
-
-4. Protected routes verify token before access  
+- Users can register and login securely  
+- Admins manage candidates  
+- Each voter can vote only once  
+- Votes are tracked and ranked via a leaderboard  
 
 ---
 
-## 📌 API Endpoints
+## ✨ Key Features
 
-### 👤 Auth
-- `POST /person/signup` → Register user  
-- `POST /person/login` → Login & get JWT  
+- 🔐 JWT-based Authentication  
+- 🛡️ Role-Based Authorization (Admin / Voter)  
+- 🗳️ One Person → One Vote  
+- 📊 Leaderboard (sorted by votes)  
+- ⚙️ RESTful API Design  
+- 🔒 Secure password handling  
+
+---
+
+## 🏗️ Architecture
+
+```
+Client → Routes → Controllers → Models → Database
+```
+
+---
+
+## 🛠️ Tech Stack
+
+- Node.js  
+- Express.js  
+- MongoDB (Mongoose)  
+- JSON Web Tokens (JWT)  
+- Postman  
+
+---
+
+## 📁 Project Structure
+
+```
+controllers/
+models/
+routes/
+middlewares/
+config/
+server.js
+.env
+```
+
+---
+
+## 🔑 API Endpoints
+
+### 🔐 Authentication
+- POST `/signup`
+- POST `/login`
+
+### 👤 Voter
+- GET `/profile`
+- PUT `/profile/password`
 
 ### 🗳️ Voting
-- `GET /candidates` → View candidates  
-- `POST /vote` → Vote (restricted to once per user)  
-- `GET /results` → View vote counts  
+- POST `/vote`
 
-### 👑 Admin
-- `POST /candidate` → Create candidate  
-- `PUT /candidate/:id` → Update candidate  
-- `DELETE /candidate/:id` → Delete candidate  
+### 🧑‍💼 Candidate (Admin Only)
+- POST `/candidates`
+- PUT `/candidates/:id`
+- DELETE `/candidates/:id`
+
+### 📊 Public
+- GET `/candidates`
+- GET `/candidates/leaderboard`
 
 ---
 
-## 📮 Postman Collection
+## 🔐 Security & Logic
 
-This project includes a Postman collection for easy API testing.
+- Aadhaar is unique per voter  
+- `isVoted` flag prevents double voting  
+- JWT protects private routes  
+- Admin-only routes restricted via role check  
 
-### 🔹 How to use:
-1. Open Postman  
-2. Click **Import**  
-3. Select the provided collection file (`VotingSystem.postman_collection.json`)  
-4. Run requests directly  
-
-### 🔹 Authorization:
-- Use **Bearer Token**  
-- Add token in headers:
 ---
 
-## ⚙️ Setup
+## ⚙️ Setup & Installation
 
 ```bash
-git clone <repo-link>
-cd voting-system
+git clone https://github.com/adi-shrivastava/Voting-CRUD-app
+cd Voting-CRUD-app
 npm install
 ```
-Create .env file:
 
-```bash
-JWT_SECRET=your_secret_key
-MONGO_URI=your_mongodb_uri
-PORT=3000
-```
-
-Run server:
-```bash
-node server.js
-```
 ---
-💡 Future Improvements
-Frontend integration (React)
-Real-time vote updates
-Rate limiting & security enhancements
-Unit testing
 
-👨‍💻 Author
+### Environment Variables
+
+```
+PORT=3000
+MONGO_URI=your_mongodb_connection
+JWT_SECRET=your_secret_key
+```
+
+---
+
+### ▶️ Run Server
+
+```bash
+npm start
+```
+
+---
+
+## 📈 Future Improvements
+
+- Election control (start/end)  
+- Rate limiting  
+- Real-time updates  
+
+---
+
+## 👨‍💻 Author
 
 ***Adi Shrivastava***
