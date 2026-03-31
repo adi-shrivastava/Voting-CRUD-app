@@ -8,4 +8,5 @@ router.post('/signup',votercontroller.signup);
 router.post('/login',votercontroller.login);
 router.get('/profile',jwtauthmiddleware,votercontroller.getprofile);
 router.put('/profile/password',jwtauthmiddleware,votercontroller.updatepassword);
+router.post('/vote/:candidateid',jwtauthmiddleware,votercontroller.vote);
 module.exports=router;

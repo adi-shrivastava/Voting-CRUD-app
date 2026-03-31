@@ -1,6 +1,3 @@
-const candidate=require('../models/candidate');
-const candidatecontroller=require('../controllers/candidatecontroller'); 
-const votercontroller=require('../controllers/votercontroller');
 const Voter = require('../models/voter');
 console.log("Admin Check Middleware Loaded!");
 exports.admincheck=async(req,res,next)=>{
