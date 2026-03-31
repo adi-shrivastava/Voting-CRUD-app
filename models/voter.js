@@ -7,11 +7,13 @@ const voterschema=new mongoose.Schema({
     },
     phone:{
         type:Number,
-        required:true
+        required:true,
+        unique:true
     },
     aadhar:{
         type:Number,
-        required:true
+        required:true,
+        unique:true
     },
     password:{
         type:String,

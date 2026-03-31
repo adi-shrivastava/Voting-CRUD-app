@@ -1,9 +1,12 @@
-const voterroutes=require('./../Routes/voterroutes');
 const Voter=require('../models/voter');
-const {jwtauthmiddleware,generateToken}=require('./../jwt');
+const {jwtauthmiddleware,generateToken}=require('../middleware/jwt');
 exports.signup=async(req,res)=>{
     try{
-        
+        const repeat=await Voter.findOne({aadhar:req.body.aadhar,name:req.body.name});
+        if(repeat){
+            console.log("Voter with same Aadhar and Name already exists!");
+            return res.status(400).json({message:"Voter with same Aadhar and Name already exists!"});
+        }
         const data=req.body
         const newVoter=new Voter(data);
         const adminexists=await Voter.findOne({role:'admin'});
@@ -48,7 +51,7 @@ exports.login=async(req,res)=>{
         res.status(500).json({message:"Error Logging In!"});
     }
 }
-exports.getprofile=jwtauthmiddleware,async(req,res)=>{
+exports.getprofile=async(req,res)=>{
     try{
         const userid=req.user.id;
         const voterprofile=await voter.findById(userid);
@@ -60,7 +63,7 @@ exports.getprofile=jwtauthmiddleware,async(req,res)=>{
         res.status(500).json({message:"Error Fetching Profile!"});
     }
 }
-exports.updatepassword=jwtauthmiddleware,async(req,res)=>{
+exports.updatepassword=async(req,res)=>{
     try{
         const userid=req.user.id;
         const{currentpassword,newpassword}=req.body;

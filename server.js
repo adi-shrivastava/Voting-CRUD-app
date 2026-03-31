@@ -7,7 +7,7 @@ const db=require('./db');
 const candidate=require('./models/candidate');
 console.log(candidate);
 
-const {jwtauthmiddleware,generateToken}=require("./jwt");
+const {jwtauthmiddleware,generateToken}=require("./middleware/jwt");
 
 
 require('dotenv').config();

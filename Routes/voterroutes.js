@@ -1,11 +1,11 @@
 const express=require('express');
 const router=express.Router();
 const voter=require('../models/voter');
-const {jwtauthmiddleware,generateToken}=require('./../jwt');
+const {jwtauthmiddleware,generateToken}=require('../middleware/jwt');
 const Voter = require('../models/voter');
 const votercontroller=require('./../controllers/votercontroller');
 router.post('/signup',votercontroller.signup);
 router.post('/login',votercontroller.login);
-router.get('/profile',votercontroller.getprofile);
-router.put('/profile/password',votercontroller.updatepassword);
+router.get('/profile',jwtauthmiddleware,votercontroller.getprofile);
+router.put('/profile/password',jwtauthmiddleware,votercontroller.updatepassword);
 module.exports=router;
