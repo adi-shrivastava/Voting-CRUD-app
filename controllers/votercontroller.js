@@ -92,7 +92,7 @@ exports.vote=async(req,res)=>{
     const candidatedata=await candidate.findById(req.params.candidateid);
     try{
         //Marking Voting of candidate
-        //Voted For!
+        //Voted For?!
         await Voter.findByIdAndUpdate(req.user.id,{hasvoted:true,votedFor:candidatedata._id});
         //Vote Count!
         await candidate.findByIdAndUpdate(req.params.candidateid,{$inc:{votecount:1}});
